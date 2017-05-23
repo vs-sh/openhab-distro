@@ -1,0 +1,22 @@
+node('master') {
+
+    stage ('Build smarthome') {
+        build 'smarthome'
+    }
+
+    stage ('Build openhab2-core') {
+        build 'openhab2-core'
+    }
+
+    stage ('Build openhab2-addons') {
+        build 'openhab2-addons'
+    }
+    
+    stage ('Build openhab2-zwave') {
+        build 'openhab2-zwave'
+    }
+
+    stage ('Build openhab2-distro') {
+        build 'openhab2-distro'
+    }
+}

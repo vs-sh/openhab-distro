@@ -1,0 +1,15 @@
+node('master') {
+
+    stage ('Checkout openhab-distro') {
+        git 'https://github.com/openhab/openhab-distro'
+    }
+
+    stage ('Build openhab-distro') {
+        sh "mvn clean install -B -U"
+    }
+
+    stage ('List Artifacts') {
+        archive 'distributions/*/target/*.kar'
+        archive 'distributions/*/target/*.zip'
+    }
+}

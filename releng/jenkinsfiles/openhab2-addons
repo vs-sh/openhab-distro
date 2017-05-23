@@ -1,0 +1,14 @@
+node('master') {
+
+    stage ('Checkout openhab2-addons') {
+        git 'https://github.com/openhab/openhab2-addons'
+    }
+
+    stage ('Build openhab2-addons') {
+        sh "mvn clean install -DskipTests -DskipChecks -B -U"
+    }
+
+    stage ('List Artifacts') {
+        archive 'addons/*/*/target/*.jar'
+    }
+}

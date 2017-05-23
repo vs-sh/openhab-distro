@@ -1,0 +1,14 @@
+node('master') {
+
+    stage ('Checkout openhab-core') {
+        git 'https://github.com/openhab/openhab-core'
+    }
+
+    stage ('Build openhab-core') {
+         sh "mvn clean install -B -U"
+    }
+
+    stage ('List Artifacts') {
+        archive 'bundles/*/target/*.jar'
+    }
+}

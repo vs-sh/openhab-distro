@@ -1,0 +1,14 @@
+node('master') {
+
+    stage ('Checkout org.openhab.binding.zwave') {
+        git 'https://github.com/openhab/org.openhab.binding.zwave'
+    }
+
+    stage ('Build org.openhab.binding.zwave') {
+        sh "mvn clean install -B -U"
+    }
+
+    stage ('List Artifacts') {
+        archive 'target/*.jar'
+    }
+}

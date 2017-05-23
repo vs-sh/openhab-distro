@@ -1,0 +1,16 @@
+node('master') {
+
+    stage ('Checkout smarthome') {
+        git 'https://github.com/eclipse/smarthome'
+    }
+
+    stage ('Build smarthome') {
+        sh "mvn clean install -B -U"
+    }
+
+    stage ('List Artifacts') {
+        archive 'distribution/target/*.zip' 
+        archive 'bundles/*/*/target/*.jar'
+        archive 'extensions/*/*/target/*.jar'
+    }
+}
